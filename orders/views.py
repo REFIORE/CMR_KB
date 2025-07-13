@@ -2,10 +2,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
 from .models import Order
-from django.contrib.auth import login
-from .forms import RegisterForm, ProfileForm
-from .models import Profile
+from .forms import ProfileForm
 from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import UserCreationForm
 
 User = get_user_model()
 
@@ -36,14 +35,12 @@ def customer_order_status(request, token):
 
 def register(request):
     if request.method == 'POST':
-        form = RegisterForm(request.POST)
+        form = UserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            Profile.objects.create(user=user)
-            login(request, user)
-            return redirect('profile')
+            form.save()
+            return redirect('login')
     else:
-        form = RegisterForm()
+        form = UserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
 
 
