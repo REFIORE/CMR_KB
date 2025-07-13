@@ -70,8 +70,8 @@ TIME_ZONE = 'Europe/Moscow'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
-SESSION_COOKIE_SECURE = False  # Для разработки (True для HTTPS)
-CSRF_COOKIE_SECURE = False     # Для разработки
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]

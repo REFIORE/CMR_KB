@@ -1,23 +1,25 @@
 {% extends "base.html" %}
 
-{% block title %}Список заказов{% endblock %}
-
 {% block content %}
-    <h2>Список заказов</h2>
-    
-    {% if orders %}
-        <ul>
-            {% for order in orders %}
-            <li>
-                <h3>{{ order.title }}</h3>
-                <p><strong>Статус:</strong> {{ order.get_status_display }}</p>
-                <p><strong>Клиент:</strong> {{ order.customer.name }}</p>
-                <p><strong>Дата создания:</strong> {{ order.created_at|date:"d.m.Y H:i" }}</p>
-                <p><strong>Описание:</strong> {{ order.description }}</p>
-            </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>Нет доступных заказов.</p>
-    {% endif %}
+<h1>Список заказов</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Название</th>
+            <th>Клиент</th>
+            <th>Статус</th>
+            <th>Дата создания</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in orders %}
+        <tr>
+            <td><a href="{% url 'order_detail' order.pk %}">{{ order.title }}</a></td>
+            <td>{{ order.customer.name }}</td>
+            <td>{{ order.get_status_display }}</td>
+            <td>{{ order.created_at|date:"d.m.Y H:i" }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}
