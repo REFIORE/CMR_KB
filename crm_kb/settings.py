@@ -11,6 +11,10 @@ DEBUG = True
 ALLOWED_HOSTS = ['26.94.197.72', '127.0.0.1']
 CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:8000']
 
+AUTH_USER_MODEL = 'orders.CustomUser'
+LOGIN_REDIRECT_URL = 'profile'
+LOGOUT_REDIRECT_URL = 'login'
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',

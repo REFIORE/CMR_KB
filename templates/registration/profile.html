@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Личный кабинет</h2>
+<p>Добро пожаловать, {{ user.username }}!</p>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Обновить профиль</button>
+</form>
+
+<h3>Ваши заказы</h3>
+<ul>
+    {% for order in user.orders.all %}
+    <li>{{ order.title }} - {{ order.get_status_display }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

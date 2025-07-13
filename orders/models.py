@@ -1,5 +1,7 @@
+from django.conf import settings
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
+from django.urls import reverse
 
 
 class Customer(models.Model):
@@ -13,6 +15,24 @@ class Customer(models.Model):
     class Meta:
         verbose_name = "Клиент"
         verbose_name_plural = "Клиенты"
+
+
+class CustomUser(AbstractUser):
+    is_customer = models.BooleanField(default=False)
+    is_employee = models.BooleanField(default=False)
+    phone = models.CharField(max_length=20, blank=True)
+
+    def get_absolute_url(self):
+        return reverse('profile')
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    bio = models.TextField(blank=True)
+    avatar = models.ImageField(upload_to='avatars/', blank=True)
+
+    def __str__(self):
+        return f"Профиль {self.user.username}"
 
 
 class Order(models.Model):
@@ -35,7 +55,7 @@ class Order(models.Model):
         verbose_name="Статус"
     )
     assigned_to = models.ForeignKey(
-        User,
+        settings.AUTH_USER_MODEL,
         on_delete=models.SET_NULL,
         null=True,
         blank=True,

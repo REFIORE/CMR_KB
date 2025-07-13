@@ -2,6 +2,12 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
 from .models import Order
+from django.contrib.auth import login
+from .forms import RegisterForm, ProfileForm
+from .models import Profile
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 class CustomLoginView(LoginView):
@@ -26,3 +32,29 @@ def order_detail(request, pk):
 def customer_order_status(request, token):
     order = get_object_or_404(Order, access_token=token)
     return render(request, 'orders/customer_status.html', {'order': order})
+
+
+def register(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            Profile.objects.create(user=user)
+            login(request, user)
+            return redirect('profile')
+    else:
+        form = RegisterForm()
+    return render(request, 'registration/register.html', {'form': form})
+
+
+@login_required
+def profile(request):
+    profile = request.user.profile
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = ProfileForm(instance=profile)
+    return render(request, 'registration/profile.html', {'form': form})
