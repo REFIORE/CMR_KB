@@ -1,0 +1,53 @@
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}CRM Конструкторского Бюро{% endblock %}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        header {
+            background: #333;
+            color: white;
+            padding: 10px 20px;
+            margin-bottom: 20px;
+        }
+        header a {
+            color: white;
+            text-decoration: none;
+        }
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background: #f4f4f4;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-left: 4px solid #333;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="content">
+            <h1>CRM Конструкторского Бюро</h1>
+            {% if user.is_authenticated %}
+                <p>Вы вошли как <strong>{{ user.username }}</strong> | <a href="{% url 'logout' %}">Выйти</a></p>
+            {% endif %}
+        </div>
+    </header>
+    
+    <main class="content">
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

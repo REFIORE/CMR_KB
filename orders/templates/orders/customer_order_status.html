@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Статус заказа #{{ order.id }}{% endblock %}
+
+{% block content %}
+    <h2>Статус заказа</h2>
+    
+    <div class="order-details">
+        <h3>{{ order.title }}</h3>
+        <p><strong>Статус:</strong> <span class="status">{{ order.get_status_display }}</span></p>
+        <p><strong>Дата создания:</strong> {{ order.created_at|date:"d.m.Y H:i" }}</p>
+        <p><strong>Последнее обновление:</strong> {{ order.updated_at|date:"d.m.Y H:i" }}</p>
+        <p><strong>Описание:</strong></p>
+        <div class="description">{{ order.description }}</div>
+    </div>
+
+    <style>
+        .order-details {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        .status {
+            color: {% if order.status == 'done' %}#2ecc71{% elif order.status == 'in_progress' %}#3498db{% else %}#e74c3c{% endif %};
+            font-weight: bold;
+        }
+        .description {
+            white-space: pre-line;
+        }
+    </style>
+{% endblock %}
