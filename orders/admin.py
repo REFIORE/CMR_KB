@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import Customer, Order
 from django.contrib.auth.admin import UserAdmin
-from .models import Profile
 from django.contrib.auth import get_user_model
+from .models import Customer, Order
+from .models import Profile
 
 User = get_user_model()
 
