@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, login
 from .models import Order
 from .forms import ProfileForm
 from .forms import CustomUserCreationForm
