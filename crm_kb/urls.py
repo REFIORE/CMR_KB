@@ -8,5 +8,4 @@ urlpatterns = [
     path('orders/', include('orders.urls', namespace='orders')),
     path('accounts/login/', CustomLoginView.as_view(), name='login'),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('', include('orders.urls')),
 ]

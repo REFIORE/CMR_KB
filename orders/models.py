@@ -49,11 +49,14 @@ class Order(models.Model):
         ('issued', 'Выдан'),
     ]
 
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, verbose_name="Клиент")
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE,
+                                 verbose_name="Клиент")
     title = models.CharField(max_length=200, verbose_name="Название")
     description = models.TextField(verbose_name="Описание")
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
-    updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата обновления")
+    created_at = models.DateTimeField(auto_now_add=True,
+                                      verbose_name="Дата создания")
+    updated_at = models.DateTimeField(auto_now=True,
+                                      verbose_name="Дата обновления")
     status = models.CharField(
         max_length=20,
         choices=STATUS_CHOICES,
