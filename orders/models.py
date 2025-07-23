@@ -18,18 +18,12 @@ class Customer(models.Model):
 
 
 class CustomUser(AbstractUser):
-    is_customer = models.BooleanField(default=True)
+    is_customer = models.BooleanField(default=False)
     is_employee = models.BooleanField(default=False)
     phone = models.CharField(max_length=20, blank=True)
 
     def get_absolute_url(self):
         return reverse('profile')
-
-    def __str__(self):
-        return self.username
-
-    class Meta:
-        db_table = 'orders_customuser'
 
 
 class Profile(models.Model):
