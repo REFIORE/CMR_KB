@@ -5,8 +5,9 @@ from orders.views import CustomLoginView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('orders/', include('orders.urls', namespace='orders')),
+    path('users/', include('users.urls')),
     path('accounts/login/', CustomLoginView.as_view(), name='login'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('', include('orders.urls')),
+    path('orders/', include('orders.urls')),
 ]
