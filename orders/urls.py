@@ -1,15 +1,11 @@
-from django.urls import path, include
+from django.urls import path
+from .views import register, profile
 from . import views
-from django.contrib.auth.views import LoginView, LogoutView
 
 app_name = 'orders'
 
 urlpatterns = [
     path('', views.order_list, name='order_list'),
-    path('register/', views.register, name='register'),
-    path('profile/', views.profile, name='profile'),
-    path('orders/', include('orders.urls')),
-    path('accounts/login/', LoginView.as_view(), name='login'),
-    path('login/', LoginView.as_view(), name='login'),
-    path('logout/', LogoutView.as_view(), name='logout'),
+    path('register/', register, name='register'),
+    path('profile/', profile, name='profile'),
 ]

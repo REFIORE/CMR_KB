@@ -1,7 +1,9 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from .models import Profile
-from orders.models import CustomUser
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 class RegisterForm(UserCreationForm):
@@ -9,13 +11,13 @@ class RegisterForm(UserCreationForm):
     phone = forms.CharField(max_length=20)
 
     class Meta:
-        model = CustomUser
-        fields = ['username', 'password1', 'password2', 'email', 'phone']
+        model = User
+        fields = ['username', 'email', 'phone', 'password1', 'password2']
 
 
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
-        model = CustomUser
+        model = User
         fields = ('username', 'email', 'phone')
 
 

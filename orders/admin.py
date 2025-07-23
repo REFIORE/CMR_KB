@@ -1,6 +1,10 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from orders.models import Customer, Order, Profile, CustomUser
+from django.contrib.auth import get_user_model
+from .models import Customer, Order
+from .models import Profile
+
+User = get_user_model()
 
 
 class CustomerAdmin(admin.ModelAdmin):
@@ -17,11 +21,11 @@ class OrderAdmin(admin.ModelAdmin):
 class CustomUserAdmin(UserAdmin):
     list_display = ('username', 'email', 'phone', 'is_staff')
     fieldsets = UserAdmin.fieldsets + (
-        ('Дополнительные данные', {'fields': ('phone',)}),
+        ('Дополнительно', {'fields': ('phone', 'is_customer', 'is_employee')}),
     )
 
 
 admin.site.register(Customer, CustomerAdmin)
 admin.site.register(Order, OrderAdmin)
-admin.site.register(CustomUser, CustomUserAdmin)
+admin.site.register(User, CustomUserAdmin)
 admin.site.register(Profile)
