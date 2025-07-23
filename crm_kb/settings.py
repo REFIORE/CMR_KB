@@ -15,6 +15,7 @@ AUTH_USER_MODEL = 'orders.CustomUser'
 
 LOGIN_REDIRECT_URL = 'profile'
 LOGOUT_REDIRECT_URL = 'login'
+LOGIN_URL = '/accounts/login/'
 
 LOGGING = {
     'version': 1,

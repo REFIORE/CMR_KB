@@ -6,6 +6,7 @@
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Зарегистрироваться</button>
+    {% comment %} <button type="submit"><a href="{% url 'orders:profile'%}">Зарегистрироваться</a></button> {% endcomment %}
 </form>
 <p>Уже есть аккаунт? <a href="{% url 'login' %}">Войти</a></p>
 {% endblock %}
