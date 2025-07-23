@@ -4,7 +4,7 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth import get_user_model, login
 from .models import Order
 from .forms import ProfileForm
-from django.contrib.auth.forms import UserCreationForm
+from .forms import CustomUserCreationForm
 
 
 User = get_user_model()
@@ -36,13 +36,13 @@ def customer_order_status(request, token):
 
 def register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('orders:order_list')
+            return redirect('orders:profile')
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
 
 
