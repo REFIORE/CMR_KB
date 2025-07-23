@@ -12,8 +12,55 @@ ALLOWED_HOSTS = ['26.94.197.72', '127.0.0.1']
 CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:8000']
 
 AUTH_USER_MODEL = 'orders.CustomUser'
+
 LOGIN_REDIRECT_URL = 'profile'
 LOGOUT_REDIRECT_URL = 'login'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
+        },
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+    },
+    'formatters': {
+        'django.server': {
+            '()': 'django.utils.log.ServerFormatter',
+            'format': '[{server_time}] {message}',
+            'style': '{',
+        }
+    },
+    'handlers': {
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+        },
+        'django.server': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'django.server',
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler'
+        }
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console', 'mail_admins'],
+            'level': 'INFO',
+        },
+        'django.server': {
+            'handlers': ['django.server'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+    }
+}
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -22,14 +69,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'orders.apps.OrdersConfig',  # Подключаем наше приложение
+    'orders.apps.OrdersConfig',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    # 'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',

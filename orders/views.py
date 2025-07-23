@@ -37,8 +37,9 @@ def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('login')
+            user = form.save()
+            login(request, user)  # Автоматический вход после регистрации
+            return redirect('orders:order_list')
     else:
         form = UserCreationForm()
     return render(request, 'registration/register.html', {'form': form})

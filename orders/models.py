@@ -25,6 +25,9 @@ class CustomUser(AbstractUser):
     def get_absolute_url(self):
         return reverse('profile')
 
+    class Meta:
+        db_table = 'orders_customuser'
+
 
 class Profile(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
