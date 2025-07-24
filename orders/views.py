@@ -18,10 +18,13 @@ class CustomLoginView(LoginView):
 @login_required
 def order_list(request):
     if request.user.is_superuser:
-        orders = Order.objects.all()
+        orders = Order.objects.all().select_related('customer')
     else:
-        orders = Order.objects.filter(assigned_to=request.user)
-    return render(request, 'orders/order_list.html', {'orders': orders})
+        orders = Order.objects.filter(assigned_to=request.user).select_related('customer')
+    return render(request, 'orders/order_list.html', {
+        'orders': orders,
+        'user': request.user  # Добавляем пользователя в контекст
+    })
 
 
 @login_required
