@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container">
     <h2>Добро пожаловать, {{ user.username }}!</h2>
-    <a href="{% url 'orders:profile' %}" class="btn btn-info">Мой профиль</a>
+    <a href="{% url 'orders:user_profile' %}" class="btn btn-info">Мой профиль</a>
     
     <h3 class="mt-4">Список заказов</h3>
     <table class="table table-striped">

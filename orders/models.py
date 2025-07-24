@@ -20,7 +20,7 @@ class Customer(models.Model):
 class CustomUser(AbstractUser):
     is_customer = models.BooleanField(default=False)
     is_employee = models.BooleanField(default=False)
-    phone = models.CharField(max_length=20, blank=True)
+    phone = models.CharField(max_length=20, blank=True, null=True)
 
     def get_absolute_url(self):
         return reverse('profile')

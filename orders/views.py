@@ -52,6 +52,11 @@ def register(request):
 
 @login_required
 def profile(request):
+    user = request.user
+    context = {
+        'user': user,
+        'phone': user.phone,
+    }
     profile = request.user.profile
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES, instance=profile)
@@ -60,4 +65,4 @@ def profile(request):
             return redirect('profile')
     else:
         form = ProfileForm(instance=profile)
-    return render(request, 'orders/profile.html', {'user': request.user})
+    return render(request, 'orders/profile.html', {'user': request.user}, context)
