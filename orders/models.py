@@ -30,6 +30,8 @@ class CustomUser(AbstractUser):
 
     class Meta:
         db_table = 'orders_customuser'
+        verbose_name = 'Пользователь'
+        verbose_name_plural = 'Пользователи'
 
 
 class Profile(models.Model):
