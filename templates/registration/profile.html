@@ -3,9 +3,18 @@
 {% block content %}
 <div class="container">
     <h2>Мой профиль</h2>
-    <p><strong>Логин:</strong> {{ user.username }}</p>
-    <p><strong>Email:</strong> {{ user.email }}</p>
-    <p><strong>Телефон:</strong> {{ phone|default:"Не указан" }}</p>
-    <a href="{% url 'orders:order_list' %}" class="btn btn-primary">Назад к заказам</a>
+    <div class="row">
+        <div class="col-md-4">
+            {% if profile.avatar %}
+                <img src="{{ profile.avatar.url }}" class="img-fluid rounded-circle">
+            {% endif %}
+        </div>
+        <div class="col-md-8">
+            <p><strong>Имя:</strong> {{ user.username }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Телефон:</strong> {{ user.phone|default:"Не указан" }}</p>
+            <p><strong>О себе:</strong> {{ profile.bio|default:"Не указано" }}</p>
+        </div>
+    </div>
 </div>
 {% endblock %}
