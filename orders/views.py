@@ -23,7 +23,7 @@ def order_list(request):
         orders = Order.objects.filter(assigned_to=request.user).select_related('customer')
     return render(request, 'orders/order_list.html', {
         'orders': orders,
-        'user': request.user  # Добавляем пользователя в контекст
+        'user': request.user
     })
 
 
@@ -66,16 +66,3 @@ def profile(request):
     else:
         form = ProfileForm(instance=profile)
     return render(request, 'orders/profile.html', {'user': request.user}, context)
-
-
-@login_required
-def edit_profile(request):
-    if request.method == 'POST':
-        form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
-        if form.is_valid():
-            form.save()
-            return redirect('profile')
-    else:
-        form = ProfileForm(instance=request.user.profile)
-
-    return render(request, 'orders/edit_profile.html', {'form': form})
