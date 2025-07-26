@@ -55,7 +55,7 @@ def register(request):
 def profile(request):
     user = request.user
     context = {
-        'user': user,
+        'user': request.user,
         'phone': user.phone,
     }
     profile = request.user.profile
