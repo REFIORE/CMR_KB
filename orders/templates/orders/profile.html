@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Мой профиль</h2>
+    
+    <div class="card">
+        <div class="card-body">
+            <p><strong>Имя пользователя:</strong> {{ user.username }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Телефон:</strong> {{ user.phone|default:"Не указан" }}</p>
+            
+            <a href="{% url 'orders:order_list' %}" class="btn btn-primary mt-3">
+                Вернуться к списку заказов
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
