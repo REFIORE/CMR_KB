@@ -7,7 +7,6 @@ from .forms import ProfileForm
 from .forms import CustomUserCreationForm
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
-from .models import Profile
 
 
 User = get_user_model()
